@@ -2,6 +2,7 @@ package com.spring.fileWatcher.service;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
@@ -22,6 +23,8 @@ public class FileWatcherService {
 	@Autowired
 	FileProcessor processor;
 	
+
+	
 	@PostConstruct
     public void startWatching() throws IOException {
 		
@@ -30,31 +33,42 @@ public class FileWatcherService {
         path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
         
         Executors.newSingleThreadExecutor().execute(() -> {
-//            while (true) {
+        	
+            while (true) {
+            	
                 try {
-                    WatchKey key = watchService.take();
+                	
+                    WatchKey key = watchService.take(); // picks only one at a tym ( blocking-i/o)
                     for (WatchEvent<?> event : key.pollEvents()) {
                     	
                         Path filePath = (Path) event.context();
                         
                         if (filePath.toString().endsWith(".xlsx")) { 
+                        	
                         	processor.processFile(filePath);
-                            System.out.println(filePath+" : filePath");
+//                            System.out.println(filePath+" : filePath");
                         }
                     }
                     key.reset();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    //break;
+                    break;
+                }catch(NoSuchFileException ee) {
+                	System.out.println("No Such File Exists..");
+                	break;
+                }catch (IOException e) {
+                	// TODO Auto-generated catch block
+                	//e.printStackTrace();
+                	break;
                 }
-//            }
- catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                
+            }
         });
 	}
 	
 
 
 }
+
+
+

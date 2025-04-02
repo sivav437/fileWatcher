@@ -46,7 +46,7 @@ public class FileUploadController {
             status.setTimestamp(new Date());
             statusService.createStatus(status);
 
-            System.out.println("data is added into status table you can track");
+            System.out.println("data is added into status table you can track happen");
             return ResponseEntity.ok(fileId); // Return unique key to client
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
