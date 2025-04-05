@@ -23,44 +23,57 @@ public class FileWatcherService {
 	@Autowired
 	FileProcessor processor;
 	
+	private WatchService createWatchService(String basePath) throws IOException {
+		
+		WatchService watchService = FileSystems.getDefault().newWatchService();
+        Path path = Paths.get(basePath);
+        path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
+		return watchService;
+	}
+	
+	private void findEventsAndProcess(WatchService watchService)  {
+		try {
+		WatchKey key = watchService.take();
+		for (WatchEvent<?> event : key.pollEvents()) {
+        	
+            Path filePath = (Path) event.context();
+            
+            if (filePath.toString().endsWith(".xlsx")) { 
+            	
+            	processor.processFile(filePath);
+            }
+        }
+        key.reset();
+		}catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }catch(NoSuchFileException ee) {
+        	System.out.println("No Such File Exists..");
+        }catch (IOException e) {
+        }
+		catch(Exception ee) {
+			
+		}
+	}
+	
 
 	
 	@PostConstruct
     public void startWatching() throws IOException {
 		
-		WatchService watchService = FileSystems.getDefault().newWatchService();
-        Path path = Paths.get("/home/ctuser/ExcelFiles/");
-        path.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
+		String basePath="D:\\ExcelFiles";
+		WatchService watchService=this.createWatchService(basePath);
+		
+		
         
         Executors.newSingleThreadExecutor().execute(() -> {
         	
             while (true) {
             	
-                try {
+                
                 	
-                    WatchKey key = watchService.take(); // picks only one at a tym ( blocking-i/o)
-                    for (WatchEvent<?> event : key.pollEvents()) {
-                    	
-                        Path filePath = (Path) event.context();
-                        
-                        if (filePath.toString().endsWith(".xlsx")) { 
-                        	
-                        	processor.processFile(filePath);
-//                            System.out.println(filePath+" : filePath");
-                        }
-                    }
-                    key.reset();
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
-                }catch(NoSuchFileException ee) {
-                	System.out.println("No Such File Exists..");
-                	break;
-                }catch (IOException e) {
-                	// TODO Auto-generated catch block
-                	//e.printStackTrace();
-                	break;
-                }
+                   this.findEventsAndProcess(watchService);
+                   
+                
                 
             }
         });
