@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -54,173 +55,197 @@ public class ExcelParserService {
 
         return parsingExcelCode(fp.toFile());
                 
-	}  
+	} 
 	
 	
-	private List<List<ExcelSheet>> parsingExcelCode(File file) throws IOException{ //InputStream inputStream
+	private Iterator<Sheet> findingSheets(Workbook workbook){
+		return workbook.iterator();
+	}
+	
+	private CommonRepo<? extends ExcelSheet,Integer> createRepositoryBasedOnSheetName(String sheet_name){
+		CommonRepo<? extends ExcelSheet,Integer> repository = null;
+		if(sheet_name.equalsIgnoreCase("customerData")) {
+			 repository = (CommonRepo<Customer, Integer>) context.getBean("customerRepo");
+		}else if(sheet_name.equalsIgnoreCase("productData")) {
+			repository = (CommonRepo<Product, Integer>) context.getBean("productRepo");
+		}
+		return repository;
+	}
+	
+	
+	private String[] findCurrentSheetHeaders(Sheet current_sheet) {
 		
-		System.out.println("entered into parsingExcelCode ");
+		Row row_header=current_sheet.getRow(0);
+		String[] headers=new String[row_header.getPhysicalNumberOfCells()];
 		
-		List<List<ExcelSheet>> allData = new ArrayList<>();
+		int  start_cell_header=row_header.getFirstCellNum();
+  	    int  end_cell_header=row_header.getLastCellNum();
+  	   
+  	    for(;start_cell_header<end_cell_header;start_cell_header++) {
+  		  
+ 		  Cell cell=row_header.getCell(start_cell_header);
+ 		  
+ 		  if(cell.getCellType().toString().equals("STRING")) {
+ 			 headers[start_cell_header]= cell.getStringCellValue();
+ 		  }
+ 		 
+  	  }
+		return headers;
+	}
+	
+	
+	private ExcelSheet createEntityBasedOnSheetName(String sheet_name) {
 		
-		CommonRepo<? extends ExcelSheet, Integer> repository = null;
+		if(sheet_name.equals("customerData")) 
+  	  {
+  		  return new Customer();
+  		  
+  	  }
+  	  else if(sheet_name.equals("productData")) 
+  	  {
+  		  return new Product();
+  		  
+  	  }
+		return null;
+	}
+	
+	
+	private Customer ExtractCustomersDataFromCell(Row row,String[] headers) {
 		
-		try (Workbook workbook = WorkbookFactory.create(file)) { //inputStream
-        	
-        	
-        	int num_sheets=workbook.getNumberOfSheets();
-        	int idx=0;
-        	
-        	//System.out.println(num_sheets+" no. of sheets");
-        	
-        	while(idx<num_sheets) {
-        		
-        	
-               Sheet sheet = (Sheet) workbook.getSheetAt(idx);
-               
-               String sheet_name=sheet.getSheetName();
-               
-               switch(sheet_name) 
-               {
-               
-               		case "customerData":
+		 int  start_cell=row.getFirstCellNum();
+  	   	 int  end_cell=row.getLastCellNum();
+  	   	 
+  	   	 Customer localCust=new Customer();
+  	   	 
+  	   for(;start_cell<end_cell;start_cell++) 
+ 	  {
+ 		  
+ 		  Cell cell=row.getCell(start_cell);
 
-               			 repository = (CommonRepo<Customer, Integer>) context.getBean("customerRepo");
-               			 
-               			 break;
-               			
-               		case "productData":
-               			
-               			repository = (CommonRepo<Product, Integer>) context.getBean("productRepo");
-               			
-               			break;
-               		
-               	}
-               
+ 		  switch(headers[start_cell]) 
+ 		  {
+ 	 
+ 		  	case "customer_id":
+ 			  
+ 		  		int customer_id=(int) getCellValue(cell,"customer_id");
+ 		  		localCust.setCustomer_id(customer_id);
+ 		  		break;
+ 			  
+ 		  	case "customer_name":
+ 			  
+ 		  		String customer_name=(String) getCellValue(cell,"customer_name");
+ 		  		localCust.setCustomer_name(customer_name);
+ 		  		break;
+ 			  
+ 		  	case "customer_password":
+ 			  
+ 		  		String customer_password=(String) getCellValue(cell,"customer_password");
+ 		  		localCust.setCustomer_password(customer_password);
+ 		  		break;
+ 			  
+ 		  }
+ 	  }
+  	   return localCust;
+  	   	 
+		
+	}
+	
+	
+	private Product ExtractProductsDataFromCell(Row row,String[] headers) {
+		
+		 int  start_cell=row.getFirstCellNum();
+ 	   	 int  end_cell=row.getLastCellNum();
+ 	   	 
+ 	   	 Product localProd=new Product();
+ 	   	for(;start_cell<end_cell;start_cell++) 
+  	  {
+  		  
+  		  Cell cell=row.getCell(start_cell);
 
-               int start_row=sheet.getFirstRowNum();
-               int end_row=sheet.getLastRowNum();
-               
-               Row row_header=sheet.getRow(0);
-               
-               String[] headers=new String[row_header.getPhysicalNumberOfCells()];
-               
-               int  start_cell_header=row_header.getFirstCellNum();
-         	   int  end_cell_header=row_header.getLastCellNum();
-         	   
-         	  for(;start_cell_header<end_cell_header;start_cell_header++) {
-         		  
-        		  Cell cell=row_header.getCell(start_cell_header);
-        		  
-        		  switch(cell.getCellType()) {
-        		  
-        		  case STRING:
-                       headers[start_cell_header]= cell.getStringCellValue();
-                       break;
-                  
-        		  }
-         	  }
-         	  
-         	  
-         	   
-               
-               for(;start_row<=end_row;start_row++) {
-            	   if( !(start_row>0)) 
-            	   { 
-            		   continue;
-            	   }
-            	   
-            	   Row row=sheet.getRow(start_row);
-            	  
-            	   int  start_cell=row.getFirstCellNum();
-            	   int  end_cell=row.getLastCellNum();
-            	  
-            	  Customer localCust = null;
-            	  Product localProd = null;
-            	  
-            	  if(sheet_name.equals("customerData")) 
-            	  {
-            		  localCust=new Customer();
-            		  
-            	  }
-            	  else if(sheet_name.equals("productData")) 
-            	  {
-            		  localProd=new Product();
-            		  
-            	  }
-            	  
-            	  for(;start_cell<end_cell;start_cell++) 
-            	  {
-            		  
-            		  Cell cell=row.getCell(start_cell);
+  		  switch(headers[start_cell]) 
+  		  {
+  			  
+  		  	case "product_id":
+  			  
+  		  		int product_id=(int) getCellValue(cell,"product_id");
+  		  		localProd.setProduct_id(product_id);
+  		  		break;
+  			  
+  		  	case "product_name":
+  			  
+  		  		String product_name=(String) getCellValue(cell,"product_name");
+  		  		localProd.setProduct_name(product_name);
+  		  		break;
+  			  
+  		  	case "product_price":
+  			  
+  		  		int product_price=(int) getCellValue(cell,"product_price");
+  		  		localProd.setProduct_price(product_price);
+  		  		break;
+  		 
+  		  }
+  	  }
+ 	   	return localProd;
+ 	   	 
+		
+	}
+	
+	
+	private void ExtractCellsFromRow(Sheet current_sheet,String[] headers) {
+		
+		int start_row=current_sheet.getFirstRowNum();
+        int end_row=current_sheet.getLastRowNum();
+        
+        String sheet_name=current_sheet.getSheetName();
+        
 
-            		  switch(headers[start_cell]) 
-            		  {
-            	 
-            		  	case "customer_id":
-            			  
-            		  		int customer_id=(int) getCellValue(cell,"customer_id");
-            		  		localCust.setCustomer_id(customer_id);
-            		  		break;
-            			  
-            		  	case "customer_name":
-            			  
-            		  		String customer_name=(String) getCellValue(cell,"customer_name");
-            		  		localCust.setCustomer_name(customer_name);
-            		  		break;
-            			  
-            		  	case "customer_password":
-            			  
-            		  		String customer_password=(String) getCellValue(cell,"customer_password");
-            		  		localCust.setCustomer_password(customer_password);
-            		  		break;
-            			  
-            		  	case "product_id":
-            			  
-            		  		int product_id=(int) getCellValue(cell,"product_id");
-            		  		localProd.setProduct_id(product_id);
-            		  		break;
-            			  
-            		  	case "product_name":
-            			  
-            		  		String product_name=(String) getCellValue(cell,"product_name");
-            		  		localProd.setProduct_name(product_name);
-            		  		break;
-            			  
-            		  	case "product_price":
-            			  
-            		  		int product_price=(int) getCellValue(cell,"product_price");
-            		  		localProd.setProduct_price(product_price);
-            		  		break;
-            		 
-            		  }
-            	  }
-            	  
-            	  if(localCust != null && localCust.getCustomer_id()>0) {
+        for(start_row=1;start_row<=end_row;start_row++) {
+     	   
+     	   Row row=current_sheet.getRow(start_row);
+     	  
+     	   int  start_cell=row.getFirstCellNum();
+     	   int  end_cell=row.getLastCellNum();
+     	  
+     	  ExcelSheet localEntity= this.createEntityBasedOnSheetName(sheet_name);
+     	  
+     	  Customer localCust = null;
+     	  Product localProd = null;
+     	  
+     	  if(sheet_name.equalsIgnoreCase("customerData")) {
+         	  localCust=this.ExtractCustomersDataFromCell(row, headers);
+         	  localProd = null;
+     	  }else if(sheet_name.equalsIgnoreCase("productData")) {
+         	  localProd=this.ExtractProductsDataFromCell(row, headers);
+         	  localCust = null;
+     	  }else {
+     		  localCust = null;
+         	  localProd = null;
+     	  }
+     	  
+     	 if(localCust != null && localCust.getCustomer_id()>0) {
 
-            		  customers.add(localCust);
-            		 
-            	  }
-            	  
-            	  if(localProd !=null && localProd.getProduct_id()>0 ) {
-            		  products.add(localProd);
-            	  }
-            	  
-            	  
-            	  
-            	   
-               }
-               
-             
-               idx++;
-        } //while block
-               
-        if(customers!=null) { 
+   		  customers.add(localCust);
+   		 
+   	  }
+   	  
+   	  if(localProd !=null && localProd.getProduct_id()>0 ) {
+   		  products.add(localProd);
+   	  }
+     	  
+        }
+
+		
+	}
+	
+	
+	private void addDataToDataBase(List<List<ExcelSheet>> allData,CommonRepo<? extends ExcelSheet,Integer> repository) {
+		
+		if(customers!=null) { 
         	
         	allData.add(new ArrayList<ExcelSheet>(customers));
         	
         	
-        	CommonRepo<Customer, Integer> customerRepo = (CommonRepo<Customer, Integer>) repository;
+			CommonRepo<Customer, Integer> customerRepo =  (CommonRepo<Customer, Integer>) repository;
             
         	customerRepo.saveAll( customers);
         	
@@ -236,7 +261,44 @@ public class ExcelParserService {
         	productRepo.saveAll(products);
         	
         	}
+       // return allData;
+	}
+	
+	private List<List<ExcelSheet>> parsingExcelCode(File file) throws IOException{ //InputStream inputStream
+		
+		System.out.println("entered into parsingExcelCode ");
+		
+		List<List<ExcelSheet>> allData = new ArrayList<>();
+		
+		
+		try (Workbook workbook = WorkbookFactory.create(file)) { //inputStream
+        	
+        	
+        	int num_sheets=workbook.getNumberOfSheets();
+        	int idx=0;
+        	
+        	CommonRepo<? extends ExcelSheet,Integer> repository=null;
+        	
+        	Iterator<Sheet> sheetItr=this.findingSheets(workbook);
+        	
+        	while(sheetItr.hasNext()) {
+        		
+               Sheet current_sheet = sheetItr.next();
+               
+               String sheet_name=current_sheet.getSheetName();
+               
+               repository=this.createRepositoryBasedOnSheetName(sheet_name);
+               
+               String[] headers= this.findCurrentSheetHeaders(current_sheet);
+               
+               
+               this.ExtractCellsFromRow(current_sheet, headers);
+               
+             
+        } //while block
+               
         
+          this.addDataToDataBase(allData, repository);
         
            return allData;
         
@@ -278,14 +340,6 @@ public class ExcelParserService {
 	
 
 	
-//	public List<List<ExcelSheet>> parseExcelFromUpload(MultipartFile file) throws IOException
-//	{
-//		
-//		InputStream inputStream = file.getInputStream();
-//		
-//		return parsingExcelCode(inputStream);
-//			
-//	}
 	
 	
 	

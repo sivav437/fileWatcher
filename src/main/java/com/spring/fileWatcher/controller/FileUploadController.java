@@ -32,12 +32,12 @@ public class FileUploadController {
         
 		String fileId = UUID.randomUUID().toString();
 		String originalName=file.getOriginalFilename();
-        String filePath = "/home/ctuser/ExcelFiles/" + fileId + "_" + originalName;
+        String filePath = "D:\\ExcelFiles" + fileId + "_" + originalName;
         
         try {
             File dest = new File(filePath);
             FileStatus status=new FileStatus();
-            System.out.println(dest.getAbsolutePath()+" abs path");
+            //System.out.println(dest.getAbsolutePath()+" abs path");
             
             file.transferTo(dest);
             status.setFileId(fileId);
