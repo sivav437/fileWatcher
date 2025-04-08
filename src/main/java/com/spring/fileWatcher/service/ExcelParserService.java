@@ -110,12 +110,13 @@ public class ExcelParserService {
 	}
 	
 	
-	private Customer ExtractCustomersDataFromCell(Row row,String[] headers) {
+	private Customer ExtractCustomersDataFromCell(Row row,String[] headers,CommonRepo<? extends ExcelSheet,Integer> repository,int id) {
 		
 		 int  start_cell=row.getFirstCellNum();
   	   	 int  end_cell=row.getLastCellNum();
   	   	 
   	   	 Customer localCust=new Customer();
+  	   	 CommonRepo<Customer, Integer> customerRepo =  (CommonRepo<Customer, Integer>) repository;
   	   	 
   	   for(;start_cell<end_cell;start_cell++) 
  	  {
@@ -128,7 +129,9 @@ public class ExcelParserService {
  		  	case "customer_id":
  			  
  		  		int customer_id=(int) getCellValue(cell,"customer_id");
- 		  		localCust.setCustomer_id(customer_id);
+// 		  		int id=(int)repository.count();
+// 		  		System.out.println(id+"cust id");
+ 		  		//localCust.setCustomer_id(id);
  		  		break;
  			  
  		  	case "customer_name":
@@ -145,18 +148,21 @@ public class ExcelParserService {
  			  
  		  }
  	  }
+  	   
+  	   
   	   return localCust;
   	   	 
 		
 	}
 	
 	
-	private Product ExtractProductsDataFromCell(Row row,String[] headers) {
+	private Product ExtractProductsDataFromCell(Row row,String[] headers,CommonRepo<? extends ExcelSheet,Integer> repository,int id) {
 		
 		 int  start_cell=row.getFirstCellNum();
  	   	 int  end_cell=row.getLastCellNum();
  	   	 
  	   	 Product localProd=new Product();
+ 	  
  	   	for(;start_cell<end_cell;start_cell++) 
   	  {
   		  
@@ -168,7 +174,10 @@ public class ExcelParserService {
   		  	case "product_id":
   			  
   		  		int product_id=(int) getCellValue(cell,"product_id");
-  		  		localProd.setProduct_id(product_id);
+  		  		
+//  		  		System.out.println(id+" : id of repo prod");
+  		  		//localProd.setProduct_id(id);
+  		  		id+=1;
   		  		break;
   			  
   		  	case "product_name":
@@ -185,20 +194,21 @@ public class ExcelParserService {
   		 
   		  }
   	  }
- 	   	return localProd;
+ 	   	
+ 	   	return localProd; // 
  	   	 
 		
 	}
 	
 	
-	private void ExtractCellsFromRow(Sheet current_sheet,String[] headers) {
+	private void ExtractCellsFromRow(Sheet current_sheet,String[] headers,CommonRepo<? extends ExcelSheet,Integer> repository) {
 		
 		int start_row=current_sheet.getFirstRowNum();
         int end_row=current_sheet.getLastRowNum();
         
         String sheet_name=current_sheet.getSheetName();
         
-
+        int id=(int)repository.count();
         for(start_row=1;start_row<=end_row;start_row++) {
      	   
      	   Row row=current_sheet.getRow(start_row);
@@ -212,23 +222,26 @@ public class ExcelParserService {
      	  Product localProd = null;
      	  
      	  if(sheet_name.equalsIgnoreCase("customerData")) {
-         	  localCust=this.ExtractCustomersDataFromCell(row, headers);
+         	  localCust=this.ExtractCustomersDataFromCell(row, headers,repository,id+=1);
+         	  System.out.println(localCust+" localCust");
          	  localProd = null;
      	  }else if(sheet_name.equalsIgnoreCase("productData")) {
-         	  localProd=this.ExtractProductsDataFromCell(row, headers);
+         	  localProd=this.ExtractProductsDataFromCell(row, headers,repository,id+=1);
+         	 System.out.println(localCust+" productData");
          	  localCust = null;
      	  }else {
      		  localCust = null;
          	  localProd = null;
      	  }
      	  
-     	 if(localCust != null && localCust.getCustomer_id()>0) {
-
+     	 if(localCust != null ) {//&& localCust.getCustomer_id()>0
+     	  System.out.println(localCust+" localCust added to customers");
    		  customers.add(localCust);
    		 
    	  }
    	  
-   	  if(localProd !=null && localProd.getProduct_id()>0 ) {
+   	  if(localProd !=null  ) { //&& localProd.getProduct_id()>0
+   		System.out.println(localProd+" localProd added to products");
    		  products.add(localProd);
    	  }
      	  
@@ -240,11 +253,14 @@ public class ExcelParserService {
 	
 	private void addDataToDataBase(List<List<ExcelSheet>> allData,CommonRepo<? extends ExcelSheet,Integer> repository) {
 		
+		
+		
+		
 		if(customers!=null) { 
-        	
+			
         	allData.add(new ArrayList<ExcelSheet>(customers));
         	
-        	
+        	System.out.println(" customers allData" +allData);
 			CommonRepo<Customer, Integer> customerRepo =  (CommonRepo<Customer, Integer>) repository;
             
         	customerRepo.saveAll( customers);
@@ -255,7 +271,7 @@ public class ExcelParserService {
         {
         	
         	allData.add(new ArrayList<ExcelSheet>(products));
-        	
+        	System.out.println(" products allData " +allData);
         	CommonRepo<Product, Integer> productRepo = (CommonRepo<Product, Integer>) repository;
             
         	productRepo.saveAll(products);
@@ -274,10 +290,10 @@ public class ExcelParserService {
 		try (Workbook workbook = WorkbookFactory.create(file)) { //inputStream
         	
         	
-        	int num_sheets=workbook.getNumberOfSheets();
-        	int idx=0;
+//        	int num_sheets=workbook.getNumberOfSheets();
+//        	int idx=0;
         	
-        	CommonRepo<? extends ExcelSheet,Integer> repository=null;
+        	CommonRepo<? extends ExcelSheet,Integer> repository=null; // have to make null
         	
         	Iterator<Sheet> sheetItr=this.findingSheets(workbook);
         	
@@ -287,20 +303,21 @@ public class ExcelParserService {
                
                String sheet_name=current_sheet.getSheetName();
                
-               repository=this.createRepositoryBasedOnSheetName(sheet_name);
+              repository=this.createRepositoryBasedOnSheetName(sheet_name);
                
                String[] headers= this.findCurrentSheetHeaders(current_sheet);
                
                
-               this.ExtractCellsFromRow(current_sheet, headers);
+               this.ExtractCellsFromRow(current_sheet, headers,repository);
                
              
         } //while block
                
-        
+          System.out.println(allData+" allData");
           this.addDataToDataBase(allData, repository);
         
            return allData;
+           
         
 	} // try block
 

@@ -1,6 +1,8 @@
 package com.spring.fileWatcher.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,7 +13,7 @@ public class Customer extends ExcelSheet {
 	
 	
 	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int customer_id;
 	
 	private String customer_name;

@@ -1,0 +1,179 @@
+"2025-04-08 15:08:34,146 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[Starting FilleWatcherApplication using Java 21.0.5 with PID 115993 (/home/ctuser/github/fileWatcher/target/classes started by ctuser in /home/ctuser/github/fileWatcher)] -- logStarting 
+""2025-04-08 15:08:34,149 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[No active profile set, falling back to 1 default profile: "default"] -- logStartupProfileInfo 
+""2025-04-08 15:08:34,340 --> org.springframework.data.repository.config.RepositoryConfigurationDelegate --> INFO --[Bootstrapping Spring Data JPA repositories in DEFAULT mode.] -- registerRepositoriesIn 
+""2025-04-08 15:08:34,353 --> org.springframework.data.repository.config.RepositoryConfigurationDelegate --> INFO --[Finished Spring Data repository scanning in 10 ms. Found 3 JPA repository interfaces.] -- registerRepositoriesIn 
+""2025-04-08 15:08:34,459 --> org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> INFO --[Tomcat initialized with port 8083 (http)] -- initialize 
+""2025-04-08 15:08:34,460 --> org.apache.catalina.core.StandardService --> INFO --[Starting service [Tomcat]] -- log 
+""2025-04-08 15:08:34,460 --> org.apache.catalina.core.StandardEngine --> INFO --[Starting Servlet engine: [Apache Tomcat/10.1.39]] -- log 
+""2025-04-08 15:08:34,472 --> org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] --> INFO --[Initializing Spring embedded WebApplicationContext] -- log 
+""2025-04-08 15:08:34,472 --> org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> INFO --[Root WebApplicationContext: initialization completed in 320 ms] -- prepareWebApplicationContext 
+""2025-04-08 15:08:34,526 --> org.hibernate.jpa.internal.util.LogHelper --> INFO --[HHH000204: Processing PersistenceUnitInfo [name: default]] -- logPersistenceUnitInformation 
+""2025-04-08 15:08:34,529 --> org.hibernate.cache.internal.RegionFactoryInitiator --> INFO --[HHH000026: Second-level cache disabled] -- initiateService 
+""2025-04-08 15:08:34,543 --> org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> INFO --[No LoadTimeWeaver setup: ignoring JPA class transformer] -- addTransformer 
+""2025-04-08 15:08:34,545 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-6 - Starting...] -- getConnection 
+""2025-04-08 15:08:34,566 --> com.zaxxer.hikari.pool.HikariPool --> INFO --[HikariPool-6 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2f500d08] -- checkFailFast 
+""2025-04-08 15:08:34,567 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-6 - Start completed.] -- getConnection 
+""2025-04-08 15:08:34,570 --> org.hibernate.orm.connections.pooling --> INFO --[HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-6)']
+	Database driver: undefined/unknown
+	Database version: 8.4.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown] -- initiateService 
+""2025-04-08 15:08:34,641 --> org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> INFO --[HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)] -- initiateService 
+""2025-04-08 15:08:34,650 --> org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean --> INFO --[Initialized JPA EntityManagerFactory for persistence unit 'default'] -- buildNativeEntityManagerFactory 
+""2025-04-08 15:08:34,730 --> org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration --> WARN --[spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning] -- openEntityManagerInViewInterceptor 
+""2025-04-08 15:08:34,878 --> org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer --> INFO --[LiveReload server is running on port 35729] -- startServer 
+""2025-04-08 15:08:34,892 --> org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> INFO --[Tomcat started on port 8083 (http) with context path '/'] -- start 
+""2025-04-08 15:08:34,899 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[Started FilleWatcherApplication in 0.832 seconds (process running for 197.175)] -- logStarted 
+""2025-04-08 15:08:34,901 --> org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener --> INFO --[Condition evaluation unchanged] -- onApplicationEvent 
+""2025-04-08 15:08:57,437 --> org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] --> INFO --[Initializing Spring DispatcherServlet 'dispatcherServlet'] -- log 
+""2025-04-08 15:08:57,437 --> org.springframework.web.servlet.DispatcherServlet --> INFO --[Initializing Servlet 'dispatcherServlet'] -- initServletBean 
+""2025-04-08 15:08:57,439 --> org.springframework.web.servlet.DispatcherServlet --> INFO --[Completed initialization in 1 ms] -- initServletBean 
+""2025-04-08 15:08:57,451 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-12-thread-1 is processing file: /home/ctuser/ExcelFiles/7b07fa55-8c09-43fd-9fb8-1ac11ed494c1_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 15:09:27,022 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-12-thread-2 is processing file: /home/ctuser/ExcelFiles/f0d98365-8cd6-444d-af23-42a441e28ac9_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 15:09:28,357 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-12-thread-3 is processing file: /home/ctuser/ExcelFiles/2383b09c-12c9-402e-b13b-186d58133c69_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 15:09:30,137 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-12-thread-4 is processing file: /home/ctuser/ExcelFiles/95380b98-b75e-4694-8ad6-624348362c73_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 15:09:31,196 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-12-thread-5 is processing file: /home/ctuser/ExcelFiles/f0a63759-b3c7-4ca5-97d3-c489bec68afe_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 15:09:32,495 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-12-thread-6 is processing file: /home/ctuser/ExcelFiles/942350f3-e0c9-43dd-9668-f0e0d3c53db5_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 15:09:37,036 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-12-thread-7 is processing file: /home/ctuser/ExcelFiles/c47e71a0-e35d-44af-aef9-41d5078c8775_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 15:09:40,672 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-12-thread-8 is processing file: /home/ctuser/ExcelFiles/0f8ec11e-584a-4813-807d-07dd65a5611e_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 15:12:38,848 --> org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener --> INFO --[Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)] -- onApplicationEvent 
+""2025-04-08 15:12:38,853 --> org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> INFO --[Commencing graceful shutdown. Waiting for active requests to complete] -- shutDownGracefully 
+""2025-04-08 15:12:38,857 --> org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> INFO --[Graceful shutdown complete] -- doShutdown 
+""2025-04-08 15:12:38,867 --> org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean --> INFO --[Closing JPA EntityManagerFactory for persistence unit 'default'] -- destroy 
+""2025-04-08 15:12:38,870 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-6 - Shutdown initiated...] -- close 
+""2025-04-08 15:12:38,881 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-6 - Shutdown completed.] -- close 
+""2025-04-08 15:12:39,184 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[Starting FilleWatcherApplication using Java 21.0.5 with PID 115993 (/home/ctuser/github/fileWatcher/target/classes started by ctuser in /home/ctuser/github/fileWatcher)] -- logStarting 
+""2025-04-08 15:12:39,185 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[No active profile set, falling back to 1 default profile: "default"] -- logStartupProfileInfo 
+""2025-04-08 15:12:39,562 --> org.springframework.data.repository.config.RepositoryConfigurationDelegate --> INFO --[Bootstrapping Spring Data JPA repositories in DEFAULT mode.] -- registerRepositoriesIn 
+""2025-04-08 15:12:39,581 --> org.springframework.data.repository.config.RepositoryConfigurationDelegate --> INFO --[Finished Spring Data repository scanning in 17 ms. Found 3 JPA repository interfaces.] -- registerRepositoriesIn 
+""2025-04-08 15:12:39,777 --> org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> INFO --[Tomcat initialized with port 8083 (http)] -- initialize 
+""2025-04-08 15:12:39,781 --> org.apache.catalina.core.StandardService --> INFO --[Starting service [Tomcat]] -- log 
+""2025-04-08 15:12:39,781 --> org.apache.catalina.core.StandardEngine --> INFO --[Starting Servlet engine: [Apache Tomcat/10.1.39]] -- log 
+""2025-04-08 15:12:39,800 --> org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] --> INFO --[Initializing Spring embedded WebApplicationContext] -- log 
+""2025-04-08 15:12:39,800 --> org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> INFO --[Root WebApplicationContext: initialization completed in 606 ms] -- prepareWebApplicationContext 
+""2025-04-08 15:12:39,871 --> org.hibernate.jpa.internal.util.LogHelper --> INFO --[HHH000204: Processing PersistenceUnitInfo [name: default]] -- logPersistenceUnitInformation 
+""2025-04-08 15:12:39,874 --> org.hibernate.cache.internal.RegionFactoryInitiator --> INFO --[HHH000026: Second-level cache disabled] -- initiateService 
+""2025-04-08 15:12:39,893 --> org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> INFO --[No LoadTimeWeaver setup: ignoring JPA class transformer] -- addTransformer 
+""2025-04-08 15:12:39,894 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-7 - Starting...] -- getConnection 
+""2025-04-08 15:12:39,944 --> com.zaxxer.hikari.pool.HikariPool --> INFO --[HikariPool-7 - Added connection com.mysql.cj.jdbc.ConnectionImpl@17cd2760] -- checkFailFast 
+""2025-04-08 15:12:39,945 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-7 - Start completed.] -- getConnection 
+""2025-04-08 15:12:39,948 --> org.hibernate.orm.connections.pooling --> INFO --[HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-7)']
+	Database driver: undefined/unknown
+	Database version: 8.4.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown] -- initiateService 
+""2025-04-08 15:12:40,124 --> org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> INFO --[HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)] -- initiateService 
+""2025-04-08 15:12:40,141 --> org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean --> INFO --[Initialized JPA EntityManagerFactory for persistence unit 'default'] -- buildNativeEntityManagerFactory 
+""2025-04-08 15:12:40,297 --> org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration --> WARN --[spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning] -- openEntityManagerInViewInterceptor 
+""2025-04-08 15:12:40,551 --> org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer --> INFO --[LiveReload server is running on port 35729] -- startServer 
+""2025-04-08 15:12:40,573 --> org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> INFO --[Tomcat started on port 8083 (http) with context path '/'] -- start 
+""2025-04-08 15:12:40,581 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[Started FilleWatcherApplication in 1.505 seconds (process running for 442.857)] -- logStarted 
+""2025-04-08 15:12:40,585 --> org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener --> INFO --[Condition evaluation unchanged] -- onApplicationEvent 
+""2025-04-08 15:16:36,558 --> org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener --> INFO --[Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)] -- onApplicationEvent 
+""2025-04-08 15:16:36,562 --> org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> INFO --[Commencing graceful shutdown. Waiting for active requests to complete] -- shutDownGracefully 
+""2025-04-08 15:16:36,566 --> org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> INFO --[Graceful shutdown complete] -- doShutdown 
+""2025-04-08 15:16:36,573 --> org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean --> INFO --[Closing JPA EntityManagerFactory for persistence unit 'default'] -- destroy 
+""2025-04-08 15:16:36,576 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-7 - Shutdown initiated...] -- close 
+""2025-04-08 15:16:36,586 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-7 - Shutdown completed.] -- close 
+""2025-04-08 15:16:36,854 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[Starting FilleWatcherApplication using Java 21.0.5 with PID 115993 (/home/ctuser/github/fileWatcher/target/classes started by ctuser in /home/ctuser/github/fileWatcher)] -- logStarting 
+""2025-04-08 15:16:36,855 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[No active profile set, falling back to 1 default profile: "default"] -- logStartupProfileInfo 
+""2025-04-08 15:16:37,060 --> org.springframework.data.repository.config.RepositoryConfigurationDelegate --> INFO --[Bootstrapping Spring Data JPA repositories in DEFAULT mode.] -- registerRepositoriesIn 
+""2025-04-08 15:16:37,071 --> org.springframework.data.repository.config.RepositoryConfigurationDelegate --> INFO --[Finished Spring Data repository scanning in 9 ms. Found 3 JPA repository interfaces.] -- registerRepositoriesIn 
+""2025-04-08 15:16:37,175 --> org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> INFO --[Tomcat initialized with port 8083 (http)] -- initialize 
+""2025-04-08 15:16:37,176 --> org.apache.catalina.core.StandardService --> INFO --[Starting service [Tomcat]] -- log 
+""2025-04-08 15:16:37,176 --> org.apache.catalina.core.StandardEngine --> INFO --[Starting Servlet engine: [Apache Tomcat/10.1.39]] -- log 
+""2025-04-08 15:16:37,189 --> org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] --> INFO --[Initializing Spring embedded WebApplicationContext] -- log 
+""2025-04-08 15:16:37,189 --> org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> INFO --[Root WebApplicationContext: initialization completed in 332 ms] -- prepareWebApplicationContext 
+""2025-04-08 15:16:37,233 --> org.hibernate.jpa.internal.util.LogHelper --> INFO --[HHH000204: Processing PersistenceUnitInfo [name: default]] -- logPersistenceUnitInformation 
+""2025-04-08 15:16:37,235 --> org.hibernate.cache.internal.RegionFactoryInitiator --> INFO --[HHH000026: Second-level cache disabled] -- initiateService 
+""2025-04-08 15:16:37,245 --> org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> INFO --[No LoadTimeWeaver setup: ignoring JPA class transformer] -- addTransformer 
+""2025-04-08 15:16:37,246 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-8 - Starting...] -- getConnection 
+""2025-04-08 15:16:37,266 --> com.zaxxer.hikari.pool.HikariPool --> INFO --[HikariPool-8 - Added connection com.mysql.cj.jdbc.ConnectionImpl@36266a56] -- checkFailFast 
+""2025-04-08 15:16:37,266 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-8 - Start completed.] -- getConnection 
+""2025-04-08 15:16:37,268 --> org.hibernate.orm.connections.pooling --> INFO --[HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-8)']
+	Database driver: undefined/unknown
+	Database version: 8.4.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown] -- initiateService 
+""2025-04-08 15:16:37,352 --> org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> INFO --[HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)] -- initiateService 
+""2025-04-08 15:16:37,360 --> org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean --> INFO --[Initialized JPA EntityManagerFactory for persistence unit 'default'] -- buildNativeEntityManagerFactory 
+""2025-04-08 15:16:37,445 --> org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration --> WARN --[spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning] -- openEntityManagerInViewInterceptor 
+""2025-04-08 15:16:37,599 --> org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer --> INFO --[LiveReload server is running on port 35729] -- startServer 
+""2025-04-08 15:16:37,613 --> org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> INFO --[Tomcat started on port 8083 (http) with context path '/'] -- start 
+""2025-04-08 15:16:37,620 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[Started FilleWatcherApplication in 0.827 seconds (process running for 679.896)] -- logStarted 
+""2025-04-08 15:16:37,622 --> org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener --> INFO --[Condition evaluation unchanged] -- onApplicationEvent 
+""2025-04-08 15:18:51,334 --> org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener --> INFO --[Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)] -- onApplicationEvent 
+""2025-04-08 15:18:51,337 --> org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> INFO --[Commencing graceful shutdown. Waiting for active requests to complete] -- shutDownGracefully 
+""2025-04-08 15:18:51,340 --> org.springframework.boot.web.embedded.tomcat.GracefulShutdown --> INFO --[Graceful shutdown complete] -- doShutdown 
+""2025-04-08 15:18:51,348 --> org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean --> INFO --[Closing JPA EntityManagerFactory for persistence unit 'default'] -- destroy 
+""2025-04-08 15:18:51,350 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-8 - Shutdown initiated...] -- close 
+""2025-04-08 15:18:51,361 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-8 - Shutdown completed.] -- close 
+""2025-04-08 15:18:51,621 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[Starting FilleWatcherApplication using Java 21.0.5 with PID 115993 (/home/ctuser/github/fileWatcher/target/classes started by ctuser in /home/ctuser/github/fileWatcher)] -- logStarting 
+""2025-04-08 15:18:51,621 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[No active profile set, falling back to 1 default profile: "default"] -- logStartupProfileInfo 
+""2025-04-08 15:18:51,787 --> org.springframework.data.repository.config.RepositoryConfigurationDelegate --> INFO --[Bootstrapping Spring Data JPA repositories in DEFAULT mode.] -- registerRepositoriesIn 
+""2025-04-08 15:18:51,796 --> org.springframework.data.repository.config.RepositoryConfigurationDelegate --> INFO --[Finished Spring Data repository scanning in 8 ms. Found 3 JPA repository interfaces.] -- registerRepositoriesIn 
+""2025-04-08 15:18:51,894 --> org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> INFO --[Tomcat initialized with port 8083 (http)] -- initialize 
+""2025-04-08 15:18:51,895 --> org.apache.catalina.core.StandardService --> INFO --[Starting service [Tomcat]] -- log 
+""2025-04-08 15:18:51,895 --> org.apache.catalina.core.StandardEngine --> INFO --[Starting Servlet engine: [Apache Tomcat/10.1.39]] -- log 
+""2025-04-08 15:18:51,906 --> org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] --> INFO --[Initializing Spring embedded WebApplicationContext] -- log 
+""2025-04-08 15:18:51,906 --> org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext --> INFO --[Root WebApplicationContext: initialization completed in 282 ms] -- prepareWebApplicationContext 
+""2025-04-08 15:18:51,951 --> org.hibernate.jpa.internal.util.LogHelper --> INFO --[HHH000204: Processing PersistenceUnitInfo [name: default]] -- logPersistenceUnitInformation 
+""2025-04-08 15:18:51,954 --> org.hibernate.cache.internal.RegionFactoryInitiator --> INFO --[HHH000026: Second-level cache disabled] -- initiateService 
+""2025-04-08 15:18:51,964 --> org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo --> INFO --[No LoadTimeWeaver setup: ignoring JPA class transformer] -- addTransformer 
+""2025-04-08 15:18:51,966 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-9 - Starting...] -- getConnection 
+""2025-04-08 15:18:51,982 --> com.zaxxer.hikari.pool.HikariPool --> INFO --[HikariPool-9 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7624767a] -- checkFailFast 
+""2025-04-08 15:18:51,982 --> com.zaxxer.hikari.HikariDataSource --> INFO --[HikariPool-9 - Start completed.] -- getConnection 
+""2025-04-08 15:18:51,984 --> org.hibernate.orm.connections.pooling --> INFO --[HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-9)']
+	Database driver: undefined/unknown
+	Database version: 8.4.3
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown] -- initiateService 
+""2025-04-08 15:18:52,058 --> org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator --> INFO --[HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)] -- initiateService 
+""2025-04-08 15:18:52,066 --> org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean --> INFO --[Initialized JPA EntityManagerFactory for persistence unit 'default'] -- buildNativeEntityManagerFactory 
+""2025-04-08 15:18:52,142 --> org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration --> WARN --[spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning] -- openEntityManagerInViewInterceptor 
+""2025-04-08 15:18:52,280 --> org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer --> INFO --[LiveReload server is running on port 35729] -- startServer 
+""2025-04-08 15:18:52,297 --> org.springframework.boot.web.embedded.tomcat.TomcatWebServer --> INFO --[Tomcat started on port 8083 (http) with context path '/'] -- start 
+""2025-04-08 15:18:52,302 --> com.spring.fileWatcher.FilleWatcherApplication --> INFO --[Started FilleWatcherApplication in 0.741 seconds (process running for 814.577)] -- logStarted 
+""2025-04-08 15:18:52,304 --> org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener --> INFO --[Condition evaluation unchanged] -- onApplicationEvent 
+""2025-04-08 18:49:33,787 --> org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] --> INFO --[Initializing Spring DispatcherServlet 'dispatcherServlet'] -- log 
+""2025-04-08 18:49:33,788 --> org.springframework.web.servlet.DispatcherServlet --> INFO --[Initializing Servlet 'dispatcherServlet'] -- initServletBean 
+""2025-04-08 18:49:33,790 --> org.springframework.web.servlet.DispatcherServlet --> INFO --[Completed initialization in 2 ms] -- initServletBean 
+""2025-04-08 18:49:33,805 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-1 is processing file: /home/ctuser/ExcelFiles/693ce811-97bd-4695-96a1-f7aef0e8bf15_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:39,924 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-2 is processing file: /home/ctuser/ExcelFiles/37041486-7945-4d18-b0b5-52e5a71fb917_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:42,060 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-3 is processing file: /home/ctuser/ExcelFiles/b467fab6-6d34-48a8-815b-71e8aeaf9a16_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:43,624 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-4 is processing file: /home/ctuser/ExcelFiles/905f44ea-1d65-4163-8265-04bb3b49e135_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:45,159 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-5 is processing file: /home/ctuser/ExcelFiles/992b44e6-af3e-432b-954b-51cbda67baa2_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:46,545 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-6 is processing file: /home/ctuser/ExcelFiles/97b15d37-3bbd-4a84-afd0-e09c72c27272_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:48,173 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-7 is processing file: /home/ctuser/ExcelFiles/a324348b-36b4-4b83-8f17-3948feab4021_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:50,271 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-8 is processing file: /home/ctuser/ExcelFiles/8eec34ec-f555-4beb-aad9-e27b6a53fe94_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:51,297 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-1 is processing file: /home/ctuser/ExcelFiles/9b668470-d913-407e-a88a-5d211b464097_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:53,155 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-2 is processing file: /home/ctuser/ExcelFiles/8b3872b9-1fe9-4d78-99e3-2ca3163479ac_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:57,730 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-3 is processing file: /home/ctuser/ExcelFiles/03b55ff6-b733-4971-b935-5d8f5ad0f2da_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:49:57,732 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-4 is processing file: /home/ctuser/ExcelFiles/9fdb8b93-aacb-4585-9a1c-8c1c82cd85cf_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:50:00,159 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-5 is processing file: /home/ctuser/ExcelFiles/93e75725-b1cd-435e-a948-7325959510fa_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:50:02,817 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-6 is processing file: /home/ctuser/ExcelFiles/76f4b3e5-c27f-4a27-8577-48a171e19103_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:13,853 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-7 is processing file: /home/ctuser/ExcelFiles/e449f143-a025-468d-ac4a-bdec4cd88ace_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:17,912 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-8 is processing file: /home/ctuser/ExcelFiles/fcfbc556-dcc0-4e76-b74f-4699d05531bb_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:21,112 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-1 is processing file: /home/ctuser/ExcelFiles/0f4e222e-5639-4788-bd37-bc03c8853ac0_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:25,135 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-2 is processing file: /home/ctuser/ExcelFiles/e62716f5-ba25-4bc7-9fd0-efee0d78b4c0_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:29,896 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-4 is processing file: /home/ctuser/ExcelFiles/33f1dd3c-4509-44a2-9399-f0b2579d8e49_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:33,966 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-3 is processing file: /home/ctuser/ExcelFiles/cd4f799d-948f-4d7e-b6f9-a5e0bab201eb_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:38,509 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-5 is processing file: /home/ctuser/ExcelFiles/1e5132e1-1ba9-4858-b270-9158ec1ba5ac_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:40,409 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-6 is processing file: /home/ctuser/ExcelFiles/f4583a22-6664-484b-8054-235a50fafb30_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:45,629 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-7 is processing file: /home/ctuser/ExcelFiles/a3ca5859-0abc-44d6-9f2a-e103eb63c8f7_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:49,819 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-8 is processing file: /home/ctuser/ExcelFiles/4b4a055a-ee1b-4e4d-a7e9-46c7c34c91ed_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:55,440 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-1 is processing file: /home/ctuser/ExcelFiles/8a2bb143-5c2a-4df6-a124-4a7f70d41462_customerExcelData.xlsx] -- lambda$0 
+""2025-04-08 18:51:59,897 --> com.spring.fileWatcher.service.FileWatcherService --> INFO --[Thread pool-18-thread-2 is processing file: /home/ctuser/ExcelFiles/fe0b6b9c-4cdf-4bba-be26-a8ee21d0b0b4_customerExcelData.xlsx] -- lambda$0 
+"
