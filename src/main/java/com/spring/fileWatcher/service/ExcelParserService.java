@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
@@ -30,7 +32,7 @@ import com.spring.fileWatcher.repository.CommonRepo;
 @Service 
 public class ExcelParserService {
 	
-	
+	private static final Logger log = LogManager.getLogger(FileWatcherService.class);
 	
 	private final ApplicationContext context;
 
@@ -39,9 +41,9 @@ public class ExcelParserService {
     }
 	
 	
-	List<Customer> customers=new ArrayList<>();
-    
-    List<Product> products=new ArrayList<>();
+//	List<Customer> customers=new ArrayList<>();
+//    
+//    List<Product> products=new ArrayList<>();
 	
     // note : should not declare entity here coz it will re-update all.
 	
@@ -49,8 +51,9 @@ public class ExcelParserService {
 	public List<List<ExcelSheet>> parseExcelFile(String filePath) throws IOException 
 	{ 
 		
-		System.out.println(filePath+" : recieved filePath at parseExcelFile");
-		
+		//System.out.println(filePath+" : recieved filePath at parseExcelFile");
+		log.info("filepath is at parseExcelFile  "+filePath);
+		System.out.println("filepath is at parseExcelFile  "+filePath);
 		Path fp=Paths.get(filePath);
 
         return parsingExcelCode(fp.toFile());
@@ -201,7 +204,7 @@ public class ExcelParserService {
 	}
 	
 	
-	private void ExtractCellsFromRow(Sheet current_sheet,String[] headers,CommonRepo<? extends ExcelSheet,Integer> repository) {
+	private void ExtractCellsFromRow(Sheet current_sheet,String[] headers,CommonRepo<? extends ExcelSheet,Integer> repository, List<Customer> customers, List<Product> products) {
 		
 		int start_row=current_sheet.getFirstRowNum();
         int end_row=current_sheet.getLastRowNum();
@@ -223,11 +226,11 @@ public class ExcelParserService {
      	  
      	  if(sheet_name.equalsIgnoreCase("customerData")) {
          	  localCust=this.ExtractCustomersDataFromCell(row, headers,repository,id+=1);
-         	  System.out.println(localCust+" localCust");
+//         	  System.out.println(localCust+" localCust");
          	  localProd = null;
      	  }else if(sheet_name.equalsIgnoreCase("productData")) {
          	  localProd=this.ExtractProductsDataFromCell(row, headers,repository,id+=1);
-         	 System.out.println(localCust+" productData");
+//         	 System.out.println(localCust+" productData");
          	  localCust = null;
      	  }else {
      		  localCust = null;
@@ -235,13 +238,14 @@ public class ExcelParserService {
      	  }
      	  
      	 if(localCust != null ) {//&& localCust.getCustomer_id()>0
-     	  System.out.println(localCust+" localCust added to customers");
+//     	  System.out.println(localCust+" localCust added to customers");
+     		 
    		  customers.add(localCust);
    		 
    	  }
    	  
    	  if(localProd !=null  ) { //&& localProd.getProduct_id()>0
-   		System.out.println(localProd+" localProd added to products");
+//   		System.out.println(localProd+" localProd added to products");
    		  products.add(localProd);
    	  }
      	  
@@ -251,7 +255,7 @@ public class ExcelParserService {
 	}
 	
 	
-	private void addDataToDataBase(List<List<ExcelSheet>> allData,CommonRepo<? extends ExcelSheet,Integer> repository) {
+	private void addDataToDataBase(List<List<ExcelSheet>> allData,CommonRepo<? extends ExcelSheet,Integer> repository,List<Customer> customers, List<Product> products) {
 		
 		
 		
@@ -260,31 +264,38 @@ public class ExcelParserService {
 			
         	allData.add(new ArrayList<ExcelSheet>(customers));
         	
-        	System.out.println(" customers allData" +allData);
+        	
 			CommonRepo<Customer, Integer> customerRepo =  (CommonRepo<Customer, Integer>) repository;
             
         	customerRepo.saveAll( customers);
-        	
+        	log.info("customers allData saved into list " +" count is "+allData.size());
+        	System.out.println(" customers allData saved into db" );
         	}
         
         if(products != null) 
         {
         	
         	allData.add(new ArrayList<ExcelSheet>(products));
-        	System.out.println(" products allData " +allData);
+        	
+        	
         	CommonRepo<Product, Integer> productRepo = (CommonRepo<Product, Integer>) repository;
             
         	productRepo.saveAll(products);
-        	
+        	log.info("products allData saved into list" +" count is "+allData.size());
+        	System.out.println(" products allData saved into db " );
         	}
        // return allData;
 	}
 	
 	private List<List<ExcelSheet>> parsingExcelCode(File file) throws IOException{ //InputStream inputStream
 		
-		System.out.println("entered into parsingExcelCode ");
+		System.out.println("entered into parsingExcelCode + thread name is "+Thread.currentThread().getName());
 		
 		List<List<ExcelSheet>> allData = new ArrayList<>();
+		
+		List<Customer> customers=new ArrayList<>();
+	    
+	    List<Product> products=new ArrayList<>();
 		
 		
 		try (Workbook workbook = WorkbookFactory.create(file)) { //inputStream
@@ -308,14 +319,14 @@ public class ExcelParserService {
                String[] headers= this.findCurrentSheetHeaders(current_sheet);
                
                
-               this.ExtractCellsFromRow(current_sheet, headers,repository);
+               this.ExtractCellsFromRow(current_sheet, headers,repository,customers, products);
                
              
         } //while block
                
-          System.out.println(allData+" allData");
-          this.addDataToDataBase(allData, repository);
-        
+//          System.out.println(allData+" allData");
+          this.addDataToDataBase(allData, repository,customers, products);
+          log.info("allData is saved into database successfully ");
            return allData;
            
         

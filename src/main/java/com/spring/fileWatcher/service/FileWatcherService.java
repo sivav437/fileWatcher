@@ -93,9 +93,11 @@ public class FileWatcherService {
 		
 		WatchService watchService=this.createWatchService(basePath);
 		
-		int numberOfThreads = Runtime.getRuntime().availableProcessors(); // total threads available.
-		this.executorService = Executors.newFixedThreadPool(numberOfThreads); // fixed thread.
+		//int numberOfThreads = Runtime.getRuntime().availableProcessors(); // total threads available.
+		this.executorService = Executors.newFixedThreadPool(10); // fixed thread.
 		
+		//  Each .xlsx file detected is submitted to the thread pool, so it gets processed in parallel.
+		// for non-blocking execution
 		Executors.newSingleThreadExecutor().submit(() -> { // spans a background thread using executors.
 			
 			// Continuously polls for file creation events and handles them in the thread.
