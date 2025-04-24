@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="30">
+
+    <Properties>
+        <Property name="LOG_DIR">logger</Property>
+        <Property name="THREAD_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss} --> %c --> %p --[%m] -- %M %n</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Custom appender for fileWatcher.service package -->
+        <RollingFile name="ThreadLogFile"
+                     fileName="${LOG_DIR}/threadlog.log"
+                     filePattern="${LOG_DIR}/threadlog-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${THREAD_LOG_PATTERN}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <!-- Optional: Console output -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${THREAD_LOG_PATTERN}" />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Only this package logs to threadlog.log -->
+        <Logger name="org.spring.fileWatcher.service" level="debug" additivity="false">
+            <AppenderRef ref="ThreadLogFile" />
+        </Logger>
+
+        <!-- Optional: Spring logs go to console or are turned off -->
+        <Root level="info">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>

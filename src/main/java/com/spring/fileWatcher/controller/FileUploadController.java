@@ -35,6 +35,7 @@ public class FileUploadController {
         String filePath = "/home/ctuser/ExcelFiles/" + fileId + "_" + originalName;
         
         try {
+        	
             File dest = new File(filePath);
             FileStatus status=new FileStatus();
             System.out.println(dest.getAbsolutePath()+" abs path");
@@ -45,9 +46,11 @@ public class FileUploadController {
             status.setStatus("PENDING");
             status.setTimestamp(new Date());
             statusService.createStatus(status);
-
-            System.out.println("data is added into status table you can track happen");
+            
+            System.out.println("file is upoladed into targeted location successfully.");
+            
             return ResponseEntity.ok(fileId); // Return unique key to client
+            
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
